@@ -14,9 +14,9 @@ function PhotoStudio() {
 
     // Package data
     const packages = {
-        basic: { name: 'Basic', price: 299 },
-        premium: { name: 'Premium', price: 499 },
-        ultimate: { name: 'Ultimate', price: 799 }
+        basic: { name: 'Basic shess', price: 299 },
+        premium: { name: 'Premium shess', price: 499 },
+        ultimate: { name: 'Ultimate shess', price: 799 }
     };
 
     // useEffect - Focus on name input when component mounts
