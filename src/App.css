@@ -1,0 +1,161 @@
+/* Pitik Navigation Styles */
+.pitik-nav {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+}
+
+/* Floating Toggle Button */
+.pitik-nav-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37 0%, #c4a02e 100%);
+    border: none;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10000;
+}
+
+.pitik-nav-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+}
+
+.pitik-nav-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Hamburger Icon */
+.pitik-nav-hamburger {
+    width: 24px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pitik-nav-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #0a0a0a;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.pitik-nav-hamburger.active .pitik-nav-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.pitik-nav-hamburger.active .pitik-nav-line:nth-child(2) {
+    opacity: 0;
+}
+
+.pitik-nav-hamburger.active .pitik-nav-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Navigation Menu */
+.pitik-nav-menu {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 0.75rem;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.pitik-nav-menu.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Navigation Items */
+.pitik-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    color: #e0e0e0;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    margin-bottom: 0.25rem;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.pitik-nav-link:last-child {
+    margin-bottom: 0;
+}
+
+.pitik-nav-link:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    transform: translateX(-4px);
+}
+
+.pitik-nav-link.current {
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+    border-left: 3px solid #d4af37;
+}
+
+.pitik-nav-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pitik-nav {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .pitik-nav-toggle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .pitik-nav-menu {
+        min-width: 180px;
+        bottom: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pitik-nav {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .pitik-nav-menu {
+        position: fixed;
+        bottom: 70px;
+        right: 1rem;
+        left: 1rem;
+        min-width: auto;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
