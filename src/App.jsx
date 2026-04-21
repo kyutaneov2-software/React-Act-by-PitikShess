@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import McoLandingPage from './Activities/mco/landingpage.jsx';
 import Pitikshess from './Activities/activity1/pitikshess.jsx';
+import Photostudio from './Activities/activity2/photostudio.jsx';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<McoLandingPage />} />
                 <Route path="/pitikshess" element={<Pitikshess />} />
+                <Route path="/photostudio" element={<Photostudio />} />
             </Routes>
         </BrowserRouter>
     );
@@ -68,6 +70,14 @@ function PitikNav() {
                 >
                     <span className="pitik-nav-label">Pitikshess</span>
                 </NavLink>
+
+				<NavLink
+					to="/photostudio"
+					className={({ isActive }) => `pitik-nav-link ${isActive ? 'current' : ''}`}
+					onClick={() => setIsMenuOpen(false)}
+				>	
+					<span className="pitik-nav-label">Photo Studio</span>
+				</NavLink>
             </div>
         </div>
     );
