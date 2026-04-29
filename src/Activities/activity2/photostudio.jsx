@@ -3,7 +3,7 @@ import './photostudio.css';
 
 function PhotoStudio() {
     // useState hooks
-    const [selectedPackage, setSelectedPackage] = useState('basic');
+    const [selectedPackage, setSelectedPackage] = useState('premium');
     const [clientName, setClientName] = useState('');
     const [clientEmail, setClientEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);

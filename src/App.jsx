@@ -66,7 +66,7 @@ function PitikNav() {
                 <NavLink 
                     to="/pitikshess"
                     className={({ isActive }) => `pitik-nav-link ${isActive ? 'current' : ''}`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setIsMenuOpen(true)}
                 >
                     <span className="pitik-nav-label">Pitikshess</span>
                 </NavLink>
