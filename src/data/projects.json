@@ -1,0 +1,30 @@
+[
+    {
+    "id": 1,
+    "title": "PitikShess timeline landing page",
+    "description": "Responsive landing page for a chess-themed side‑hustle. Working in progressive enhancement.",
+    "tech": ["React", "CSS", "JavaScript"],
+    "category": "MCO compilation"
+    },
+    {
+    "id": 2,
+    "title": "Pitikshess main studio",
+    "description": "Responsive landing page for a photography side‑hustle.",
+    "tech": ["React", "CSS", "JavaScript"],
+    "category": "Activity 1"
+    },
+    {
+    "id": 3,
+    "title": "Photo Studio Booker",
+    "description": "Booking form with form validation and state management.",
+    "tech": ["React", "Hooks", "CSS"],
+    "category": "Activity 2"
+    },
+    {
+    "id": 4,
+    "title": "Pitikshess data viewer",
+    "description": "Simple data viewer for project showcase information. Fetches data from a JSON file and displays it in a user-friendly format.",
+    "tech": ["React", "CSS", "JSON", "JavaScript"],
+    "category": "Activity 3"
+    }
+]

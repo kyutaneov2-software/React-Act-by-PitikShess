@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import McoLandingPage from './Activities/mco/landingpage.jsx';
 import Pitikshess from './Activities/activity1/pitikshess.jsx';
 import Photostudio from './Activities/activity2/photostudio.jsx';
+import PitikDataView from './Activities/activity3/pitikdatas.jsx';
+
 import './App.css';
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
                 <Route path="/" element={<McoLandingPage />} />
                 <Route path="/pitikshess" element={<Pitikshess />} />
                 <Route path="/photostudio" element={<Photostudio />} />
+                <Route path="/pitikdatas" element={<PitikDataView />} />
             </Routes>
         </BrowserRouter>
     );
@@ -77,6 +80,14 @@ function PitikNav() {
 					onClick={() => setIsMenuOpen(false)}
 				>	
 					<span className="pitik-nav-label">Photo Studio</span>
+				</NavLink>
+
+				<NavLink
+					to="/pitikdatas"
+					className={({ isActive }) => `pitik-nav-link ${isActive ? 'current' : ''}`}
+					onClick={() => setIsMenuOpen(false)}
+				>	
+					<span className="pitik-nav-label">Pitik Data Viewer</span>
 				</NavLink>
             </div>
         </div>

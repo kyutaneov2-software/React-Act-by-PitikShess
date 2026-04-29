@@ -6,6 +6,15 @@
     text-align: left;
 }
 
+.studio-form span {
+    display: block;
+    color: #d4af37;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 .studio-field {
     margin-bottom: 1.5rem;
 }
