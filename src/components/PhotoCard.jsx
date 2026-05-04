@@ -18,11 +18,8 @@ function PhotoCard({ id, title, imageUrl, albumId }) {
 
     return (
         <div className="photo-card">
-            {/* Image area with skeleton loader while image loads */}
+            {/* Image area — fades in once the browser finishes loading */}
             <div className="photo-card-img-wrap">
-                {/* Skeleton placeholder - hides once image loads */}
-                {!imgLoaded && <div className="photo-card-skeleton" />}
-
                 <img
                     src={imageUrl}
                     alt={title}

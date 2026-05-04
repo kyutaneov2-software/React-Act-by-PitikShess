@@ -18,23 +18,9 @@
 .photo-card-img-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 2; /* keeps all cards the same height */
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     background: #111;
-}
-
-/* Skeleton shimmer while image loads */
-.photo-card-skeleton {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.4s infinite;
-}
-
-@keyframes shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
 }
 
 .photo-card-img {
@@ -94,7 +80,6 @@
     /* Clamp to 2 lines so cards stay uniform height */
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

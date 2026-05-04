@@ -4,7 +4,7 @@ import SearchBar from '../../components/SearchBar.jsx';
 import Loader from '../../components/Loader.jsx';
 import './pitikgallery.css';
 
-// ─── API Config 
+// ─── API Config ───────────────────────────────────────────────────────────────
 // JSONPlaceholder gives us 5000 photo entries (id, title, albumId, url, thumbnailUrl)
 // We swap the url to picsum.photos so images actually load beautifully.
 const API_URL = 'https://jsonplaceholder.typicode.com/photos';
@@ -12,9 +12,9 @@ const API_URL = 'https://jsonplaceholder.typicode.com/photos';
 // How many photos to show per page
 const PAGE_SIZE = 12;
 
-// ─── Main Activity 4 Component 
+// ─── Main Activity 4 Component ────────────────────────────────────────────────
 function PitikGallery() {
-    // ── State 
+    // ── State ──────────────────────────────────────────────────────────────────
     const [photos, setPhotos]       = useState([]);    // raw data from API
     const [filtered, setFiltered]   = useState([]);    // after search filter
     const [loading, setLoading]     = useState(true);  // show loader while fetching
@@ -22,7 +22,7 @@ function PitikGallery() {
     const [search, setSearch]       = useState('');    // search input value
     const [page, setPage]           = useState(1);     // current page number
 
-    // ── Fetch photos from API on mount 
+    // ── Fetch photos from API on mount ────────────────────────────────────────
     useEffect(() => {
         // Reset states before fetching
         setLoading(true);
@@ -55,7 +55,7 @@ function PitikGallery() {
             });
     }, []); // [] = run once on mount
 
-    // ── Filter photos whenever search input changes 
+    // ── Filter photos whenever search input changes ────────────────────────────
     useEffect(() => {
         const query = search.toLowerCase().trim();
 
@@ -73,12 +73,12 @@ function PitikGallery() {
         setPage(1);
     }, [search, photos]); // re-runs when search or photos changes
 
-    // ── Pagination helpers 
+    // ── Pagination helpers ────────────────────────────────────────────────────
     const totalPages  = Math.ceil(filtered.length / PAGE_SIZE);
     const start       = (page - 1) * PAGE_SIZE;
     const currentPage = filtered.slice(start, start + PAGE_SIZE);
 
-    // ── Render 
+    // ── Render ─────────────────────────────────────────────────────────────────
     return (
         <div className="pitikshess">
             {/* Header - reuses the PitikShess brand style */}
@@ -99,18 +99,15 @@ function PitikGallery() {
                         Photo <span className="pitikshess-gold">Gallery</span>
                     </h2>
                     <p className="pitikshess-description">
-                        {/* Show how many photos loaded, or a placeholder while loading */}
-                        {loading
-                            ? 'Fetching your shots...'
-                            : `${filtered.length} photos fetched from JSONPlaceholder API`
-                        }
+                        {/* Only show count once data is ready */}
+                        {!loading && `${filtered.length} photos fetched from JSONPlaceholder API`}
                     </p>
 
                     {/* SearchBar - reusable component via props */}
                     <SearchBar value={search} onChange={setSearch} />
 
-                    {/* ── Conditional rendering based on state ── */}
-                    {loading && <Loader />}
+                    {/* ── Skeletal loading: renders ghost cards matching the real grid ── */}
+                    {loading && <Loader count={PAGE_SIZE} />}
 
                     {error && (
                         <p className="pitikgallery-error">⚠ {error}</p>
