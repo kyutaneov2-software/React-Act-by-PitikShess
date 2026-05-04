@@ -22,12 +22,12 @@ Open terminal and runs this program
 Adi an ig run kung ikaw nag bago change.
 - 1: git status
 - 2: git add .
-- 3: git commit "Nano an nag bago?"
+- 3: git commit -m "Nano an nag bago?"
 - 4: git push 
 
 Adi an ig run kun magkukuha sa ka san code sa github
 - 1: git add .
-- 2: git commit "saved"
+- 2: git commit -m "saved"
 - 3: git pull
 
 
