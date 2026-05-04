@@ -1,0 +1,59 @@
+/* ─── SearchBar Component ────────────────────────────────────────────────────── */
+
+.searchbar-wrap {
+    position: relative;
+    max-width: 480px;
+    margin: 1.5rem auto;
+}
+
+.searchbar-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.searchbar-input {
+    width: 100%;
+    padding: 0.75rem 2.8rem 0.75rem 2.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    outline: none;
+}
+
+.searchbar-input::placeholder {
+    color: #555;
+}
+
+.searchbar-input:focus {
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.06);
+}
+
+/* Clear (×) button */
+.searchbar-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.3rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.searchbar-clear:hover {
+    color: #d4af37;
+}

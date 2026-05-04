@@ -15,3 +15,20 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
+## GIT COMMANDS
+
+Open terminal and runs this program
+
+Adi an ig run kung ikaw nag bago change.
+- 1: git status
+- 2: git add .
+- 3: git commit "Nano an nag bago?"
+- 4: git push 
+
+Adi an ig run kun magkukuha sa ka san code sa github
+- 1: git add .
+- 2: git commit "saved"
+- 3: git pull
+
+
+ 
