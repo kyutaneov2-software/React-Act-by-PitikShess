@@ -12,7 +12,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com/photos';
 // How many photos to show per page
 const PAGE_SIZE = 12;
 
-// ─── Main Activity 4 Component ────────────────────────────────────────────────
+
 function PitikGallery() {
     // ── State ──────────────────────────────────────────────────────────────────
     const [photos, setPhotos]       = useState([]);    // raw data from API

@@ -28,7 +28,7 @@ function PhotoCard({ id, title, imageUrl, albumId }) {
                     onError={e => {
                         // Fallback if picsum is down
                         e.target.src = `https://via.placeholder.com/600x400/1a1a1a/d4af37?text=PitikShess`;
-                        setImgLoaded(true);
+                        setImgLoaded(true)
                     }}
                 />
 
