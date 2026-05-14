@@ -1,0 +1,853 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --pitik-bg: #0a0a0a;
+    --pitik-surface: #111111;
+    --pitik-border: #2a2a2a;
+    --pitik-accent: #d4af37;
+    --pitik-accent2: #b8942e;
+    --pitik-text: #f0f0f0;
+    --pitik-muted: #8a8a8a;
+    --pitik-card: #1a1a1a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.pitik-root {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--pitik-bg);
+    color: var(--pitik-text);
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* ── Custom Cursor ── */
+.pitik-cursor {
+    width: 12px;
+    height: 12px;
+    background: var(--pitik-accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+
+.pitik-cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--pitik-accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.4;
+}
+
+/* ── Noise Overlay ── */
+.pitik-root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* ── Navigation ── */
+.pitik-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.pitik-nav-scrolled {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(16px);
+    border-color: var(--pitik-border);
+}
+
+.pitik-nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--pitik-accent);
+}
+
+/* Desktop menu */
+.pitik-nav-menu {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.pitik-nav-menu a {
+    color: var(--pitik-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.pitik-nav-menu a:hover {
+    color: var(--pitik-text);
+}
+
+.pitik-nav-action {
+    padding: 0.55rem 1.4rem;
+    border: 1px solid var(--pitik-accent);
+    color: var(--pitik-accent) !important;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s !important;
+}
+
+.pitik-nav-action:hover {
+    background: var(--pitik-accent);
+    color: var(--pitik-bg) !important;
+}
+
+/* Hamburger button (hidden on desktop) */
+.pitik-nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 200;
+}
+
+.pitik-nav-hamburger-line {
+    width: 100%;
+    height: 2px;
+    background: var(--pitik-accent);
+    transition: 0.3s;
+    display: block;
+    margin: 3px 0;
+}
+
+.pitik-nav-hamburger.active .pitik-nav-hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.pitik-nav-hamburger.active .pitik-nav-hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+.pitik-nav-hamburger.active .pitik-nav-hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu overlay */
+.pitik-nav-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 150;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.pitik-nav-mobile.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pitik-nav-mobile-list {
+    list-style: none;
+    text-align: center;
+}
+
+.pitik-nav-mobile-list li {
+    margin: 1.5rem 0;
+}
+
+.pitik-nav-mobile-list a {
+    color: var(--pitik-muted);
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.pitik-nav-mobile-list a:hover {
+    color: var(--pitik-accent);
+}
+
+/* Responsive nav behavior */
+@media (max-width: 800px) {
+    .pitik-nav-menu {
+        display: none;
+    }
+    .pitik-nav-hamburger {
+        display: flex;
+    }
+    .pitik-nav-mobile {
+        display: flex;
+    }
+}
+
+/* ── Showcase (Hero) ── */
+.pitik-showcase {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pitik-showcase::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--pitik-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--pitik-border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+    opacity: 0.4;
+}
+
+.pitik-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.pitik-glow-primary {
+    width: 500px;
+    height: 500px;
+    background: var(--pitik-accent);
+    top: -100px;
+    right: -80px;
+    animation: pitik-drift 10s ease-in-out infinite alternate;
+}
+
+.pitik-glow-secondary {
+    width: 380px;
+    height: 380px;
+    background: var(--pitik-accent2);
+    bottom: -60px;
+    left: -60px;
+    animation: pitik-drift 13s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pitik-drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, 20px) scale(1.08); }
+}
+
+.pitik-showcase-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+}
+
+.pitik-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--pitik-border);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pitik-muted);
+    margin-bottom: 2rem;
+    animation: pitik-fade-up 0.6s 0.1s both;
+}
+
+.pitik-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--pitik-accent);
+    border-radius: 50%;
+    animation: pitik-pulse 2s infinite;
+}
+
+@keyframes pitik-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.pitik-maintitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 13vw, 11rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    animation: pitik-fade-up 0.7s 0.2s both;
+}
+
+.pitik-maintitle span {
+    display: block;
+    -webkit-text-stroke: 1px var(--pitik-muted);
+    color: transparent;
+}
+
+.pitik-maintitle em {
+    font-style: normal;
+    color: var(--pitik-accent);
+}
+
+.pitik-tagline {
+    margin-top: 1.8rem;
+    font-size: 1.05rem;
+    color: var(--pitik-muted);
+    max-width: 480px;
+    margin-inline: auto;
+    line-height: 1.7;
+    font-weight: 300;
+    animation: pitik-fade-up 0.7s 0.35s both;
+}
+
+.pitik-showcase-actions {
+    margin-top: 2.8rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: pitik-fade-up 0.7s 0.5s both;
+}
+
+/* Buttons */
+.pitik-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: none;
+}
+
+.pitik-btn:hover {
+    transform: translateY(-2px);
+}
+
+.pitik-btn-fill {
+    background: var(--pitik-accent);
+    color: #0a0a0a;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.pitik-btn-fill:hover {
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.4);
+}
+
+.pitik-btn-outline {
+    border: 1px solid var(--pitik-border);
+    color: var(--pitik-text);
+}
+
+.pitik-btn-outline:hover {
+    border-color: var(--pitik-muted);
+}
+
+.pitik-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--pitik-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: pitik-fade-up 0.7s 0.8s both;
+}
+
+.pitik-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(var(--pitik-accent), transparent);
+    animation: pitik-scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pitik-scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes pitik-fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section Commons ── */
+section {
+    padding: 7rem 3rem;
+}
+
+.pitik-section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pitik-accent);
+    margin-bottom: 0.8rem;
+}
+
+.pitik-section-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.2rem;
+}
+
+.pitik-section-text {
+    color: var(--pitik-muted);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.7;
+}
+
+/* ── About ── */
+.pitik-about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    align-items: center;
+}
+
+.pitik-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--pitik-border);
+    border: 1px solid var(--pitik-border);
+}
+
+.pitik-stat-card {
+    background: var(--pitik-card);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+}
+
+.pitik-stat-card:hover {
+    background: var(--pitik-surface);
+}
+
+.pitik-stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--pitik-accent);
+    line-height: 1;
+    letter-spacing: 0.04em;
+}
+
+.pitik-stat-label {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--pitik-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ── Features ── */
+.pitik-features-section {
+    background: var(--pitik-surface);
+    border-top: 1px solid var(--pitik-border);
+    border-bottom: 1px solid var(--pitik-border);
+}
+
+.pitik-features-container {
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.pitik-features-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.pitik-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--pitik-border);
+}
+
+.pitik-feature-card {
+    background: var(--pitik-card);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+}
+
+.pitik-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pitik-accent), var(--pitik-accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+.pitik-feature-card:hover {
+    background: #222;
+}
+
+.pitik-feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.pitik-feature-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.4rem;
+}
+
+.pitik-feature-icon-svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--pitik-accent);
+}
+
+.pitik-feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+}
+
+.pitik-feature-desc {
+    font-size: 0.88rem;
+    color: var(--pitik-muted);
+    line-height: 1.65;
+    font-weight: 300;
+}
+
+/* ── Timeline ── */
+.pitik-timeline-section {
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+.pitik-timeline-track {
+    margin-top: 4rem;
+    position: relative;
+    padding-left: 2rem;
+    border-left: 1px solid var(--pitik-border);
+}
+
+.pitik-timeline-node {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+}
+
+.pitik-timeline-marker {
+    position: absolute;
+    left: -2.45rem;
+    top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    background: var(--pitik-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+.pitik-timeline-date {
+    font-size: 0.75rem;
+    color: var(--pitik-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.pitik-timeline-event {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    margin-top: 0.3rem;
+}
+
+.pitik-timeline-desc {
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--pitik-muted);
+    line-height: 1.6;
+}
+
+/* ── Crew (Founders) ── */
+.pitik-crew-section {
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.pitik-crew-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.pitik-crew-card {
+    background: var(--pitik-card);
+    border: 1px solid var(--pitik-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.pitik-crew-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--pitik-accent);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.pitik-crew-avatar {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: var(--pitik-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.pitik-crew-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.pitik-crew-card:hover .pitik-crew-photo {
+    transform: scale(1.03);
+}
+
+.pitik-crew-initial {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--pitik-accent);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+.pitik-crew-info {
+    padding: 1.5rem 1rem;
+    width: 100%;
+}
+
+.pitik-crew-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.3rem;
+}
+
+.pitik-crew-role {
+    font-size: 0.8rem;
+    color: var(--pitik-muted);
+    margin-bottom: 0.8rem;
+}
+
+.pitik-crew-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--pitik-accent);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+}
+
+.pitik-crew-github:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* ── CTA ── */
+.pitik-cta-section {
+    text-align: center;
+    border-top: 1px solid var(--pitik-border);
+    background: var(--pitik-surface);
+    padding: 7rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pitik-cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(212, 175, 55, 0.06), transparent);
+}
+
+.pitik-cta-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    position: relative;
+    z-index: 1;
+}
+
+.pitik-cta-heading span {
+    -webkit-text-stroke: 1px var(--pitik-border);
+    color: transparent;
+}
+
+.pitik-cta-actions {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Footer ── */
+.pitik-footer {
+    border-top: 1px solid var(--pitik-border);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.pitik-footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--pitik-muted);
+}
+
+.pitik-footer-text {
+    font-size: 0.78rem;
+    color: var(--pitik-muted);
+}
+
+.pitik-footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.pitik-footer-links a {
+    font-size: 0.78rem;
+    color: var(--pitik-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.pitik-footer-links a:hover {
+    color: var(--pitik-text);
+}
+
+/* ── Reveal on Scroll ── */
+.pitik-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.pitik-reveal.pitik-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+    .pitik-nav {
+        padding: 1rem 1.5rem;
+    }
+    section {
+        padding: 4rem 1.5rem;
+    }
+    .pitik-about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .pitik-features-grid {
+        grid-template-columns: 1fr;
+    }
+    .pitik-features-header {
+        flex-direction: column;
+    }
+    .pitik-timeline-track {
+        padding-left: 1.5rem;
+    }
+    .pitik-timeline-node {
+        padding-left: 1.5rem;
+    }
+    .pitik-timeline-marker {
+        left: -1.95rem;
+    }
+    .pitik-crew-avatar {
+        height: 220px;
+    }
+    .pitik-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,19 +1,19 @@
-import React from 'react';
-import './DataCard.css'; // optional custom styling
+    import React from 'react';
+    import './DataCard.css';
 
-function PitikData({ title, description, tech, category }) {
+    function PitikData({ title, description, tech, category }) {
     return (
-        <div className="data-card">
-            <h3 className="data-card-title">{title}</h3>
-            <p className="data-card-desc">{description}</p>
-            <div className="data-card-tech">
+        <div className="pitik-card">
+            <h3 className="pitik-card-title">{title}</h3>
+            <p className="pitik-card-desc">{description}</p>
+            <div className="pitik-card-tech">
                 {tech.map((item, index) => (
-                <span key={index} className="tech-badge">{item}</span>
+                <span key={index} className="pitik-tech-badge">{item}</span>
                 ))}
             </div>
-            <span className="data-card-category">{category}</span>
+            <span className="pitik-card-category">{category}</span>
         </div>
     );
-}
+    }
 
-export default PitikData;
+    export default PitikData;
